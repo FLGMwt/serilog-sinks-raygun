@@ -1,0 +1,32 @@
+{
+  "version": "1.4.0-*",
+  "description": "Serilog event sink that writes to the Raygun.io service.",
+  "authors": [ "Michiel van Oudheusden" ],
+  "packOptions": {
+    "tags": [ "serilog", "Raygun.io", "logging", "error" ],
+    "projectUrl": "http://serilog.net",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "iconUrl": "http://serilog.net/images/serilog-sink-nuget.png"
+  },
+  "dependencies": {
+    "Mindscape.Raygun4Net.AspNetCore": "5.3.2",
+    "Serilog": "2.3.0"
+  },
+  "buildOptions": {
+    // "keyFile": "../../assets/Serilog.snk",
+    "xmlDoc": true,
+    "warningsAsErrors": true
+  },
+  "frameworks": {
+    "net4.6": {
+      "buildOptions": {
+        "define": [ "ASYNCLOCAL" ]
+      }
+    },
+    "netstandard1.6": {
+      "buildOptions": {
+        "define": ["ASYNCLOCAL"]
+      }
+    }
+  }
+}

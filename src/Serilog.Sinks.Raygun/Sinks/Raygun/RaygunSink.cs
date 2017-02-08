@@ -1,11 +1,11 @@
 ﻿// Copyright 2014 Serilog Contributors
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,7 +16,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Mindscape.Raygun4Net;
 using Mindscape.Raygun4Net.Builders;
 using Mindscape.Raygun4Net.Messages;
@@ -90,7 +89,7 @@ namespace Serilog.Sinks.Raygun
                          .Select(pv => new { Name = pv.Key, Value = RaygunPropertyFormatter.Simplify(pv.Value) })
                          .ToDictionary(a => a.Name, b => b.Value);
 
-            // Add the message 
+            // Add the message
             properties.Add("RenderedLogMessage", logEvent.RenderMessage(_formatProvider));
             properties.Add("LogMessageTemplate", logEvent.MessageTemplate.Text);
 
@@ -139,12 +138,12 @@ namespace Serilog.Sinks.Raygun
                     raygunMessage.Details.Tags.Add(tag.ToString());
             }
 
-            if (HttpContext.Current != null)
-            {
-                // Request message is built here instead of raygunClient.Send so RequestMessageOptions have to be constructed here
-                var requestMessageOptions = new RaygunRequestMessageOptions(_ignoredFormFieldNames, Enumerable.Empty<string>(), Enumerable.Empty<string>(), Enumerable.Empty<string>());
-                raygunMessage.Details.Request = RaygunRequestMessageBuilder.Build(HttpContext.Current.Request, requestMessageOptions);
-            }
+            // if (HttpContext.Current != null)
+            // {
+            //     // Request message is built here instead of raygunClient.Send so RequestMessageOptions have to be constructed here
+            //     var requestMessageOptions = new RaygunRequestMessageOptions(_ignoredFormFieldNames, Enumerable.Empty<string>(), Enumerable.Empty<string>(), Enumerable.Empty<string>());
+            //     raygunMessage.Details.Request = RaygunRequestMessageBuilder.Build(HttpContext.Current.Request, requestMessageOptions);
+            // }
 
             // Submit
             _client.Send(raygunMessage);
